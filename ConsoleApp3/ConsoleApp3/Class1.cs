@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,11 @@ namespace ConsoleApp3
             Console.WriteLine("3. Output Stats");
             Console.WriteLine("4. Output Grade Profile");
             Console.WriteLine("5. Exit");
+        }
+
+        private void InstantiateStudent()
+        {
+            Student student = new Student();
         }
     }
 }
