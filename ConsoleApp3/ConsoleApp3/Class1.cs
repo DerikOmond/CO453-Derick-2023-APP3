@@ -8,6 +8,10 @@ namespace ConsoleApp3
 {
     public class Student
     {
+        private int marks;
+        private string name;
+        private char grade;
+
         public void Run()
         {
             DisplayHeader();
