@@ -11,6 +11,7 @@ namespace ConsoleApp3
         public void Run()
         {
             DisplayHeader();
+            DisplayMenu();
         }
 
         private void DisplayHeader()
@@ -21,6 +22,16 @@ namespace ConsoleApp3
             Console.WriteLine("==========================================================================================\n");
             Console.Write("Press enter to begin > ");
             Console.ReadLine();
+        }
+
+        private void DisplayMenu()
+        {
+            Console.WriteLine("\nMENU:");
+            Console.WriteLine("1. Input Marks");
+            Console.WriteLine("2. Output Marks");
+            Console.WriteLine("3. Output Stats");
+            Console.WriteLine("4. Output Grade Profile");
+            Console.WriteLine("5. Exit");
         }
     }
 }
