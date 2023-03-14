@@ -9,9 +9,13 @@ namespace ConsoleApp3
 {
     public class Student
     {
+        private string FirstName;
+        private string LastName;
         private int marks;
-        private string name;
         private char grade;
+
+        private string[] firstNameList;
+        private string[] lastNameList;
 
         public void Run()
         {
