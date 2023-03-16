@@ -34,22 +34,26 @@ namespace ConsoleApp3
 
         private static void DisplayHeader()
         {
-            Console.WriteLine("\n==========================================================================================");
-            Console.WriteLine("========                           App03 Student Marks                            ========");
-            Console.WriteLine("========                             By Derick Omondi                             ========");
-            Console.WriteLine("==========================================================================================\n");
-            Console.Write("Press enter to begin > ");
+            Console.WriteLine($@"
+==========================================================================================
+========                           App03 Student Marks                            =======
+========                             By Derick Omondi                             =======
+==========================================================================================
+
+Press enter to begin...");
+
             Console.ReadLine();
         }
 
         private static void DisplayMenu()
         {
-            Console.WriteLine("\nMENU:");
-            Console.WriteLine("1. Input Marks");
-            Console.WriteLine("2. Output Marks");
-            Console.WriteLine("3. Output Stats");
-            Console.WriteLine("4. Output Grade Profile");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine(@"
+MENU:
+1. Input Marks
+2. Output Marks
+3. Output Stats
+4. Output Grade Profile
+5. Exit");
         }
 
         public static void DisplayStudent(List<Student> list)
@@ -67,9 +71,9 @@ namespace ConsoleApp3
             Console.ReadLine();
         }
 
-        public static void InputMark(List<Student> list)
+        public static void UpdateMark(List<Student> list)
         {
-            Console.WriteLine("Select a ");
+            Console.WriteLine("Select a");
         }
     }
 }
