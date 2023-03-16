@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace ConsoleApp3
@@ -48,15 +49,15 @@ namespace ConsoleApp3
             }
             else if (option == 3)
             {
-
+                //OutputMarks();
             }
             else if (option == 4)
             {
-
+                //OutputStats();
             }
             else if (option == 5)
             {
-
+                //OutputGradeProfile();
             }
         }
 
@@ -79,9 +80,9 @@ Press enter to begin...");
 MENU:
 1. Input Marks
 2. Add Student
-2. Output Marks
-3. Output Stats
-4. Output Grade Profile
+3. Output Marks
+4. Output Stats
+5. Output Grade Profile
 5. Exit
 Enter the number corrsoponding the the options shown > ");
             option = Int16.Parse(Console.ReadLine());
@@ -124,6 +125,20 @@ Enter the number corrsoponding the the options shown > ");
             selectedStudent.mark = int.Parse(Console.ReadLine());
 
             DisplayStudent(list);
+        }
+
+        public static void AddStudent(List<Student> list)
+        {
+            Console.Write("First name: ");
+            string newFirstName = Console.ReadLine();
+
+            Console.Write("Last name: ");
+            string newLastName = Console.ReadLine();
+
+            Console.Write("Mark: ");
+            int mark = Int16.Parse(Console.ReadLine());
+
+            list.Add(new Student(newFirstName, newLastName, mark, grade));
         }
     }
 }
