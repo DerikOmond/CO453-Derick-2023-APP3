@@ -4,26 +4,35 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ConsoleApp3
 {
     public class Student
     {
-        private string FirstName;
-        private string LastName;
-        private int marks;
+        private string firstName;
+        private string lastName;
+        private int mark;
         private char grade;
 
-        private string[] firstNameList;
-        private string[] lastNameList;
-
-        public void Run()
+         public Student(String firstName, String lastName, int mark, char grade)
         {
-            DisplayHeader();
-            DisplayMenu();
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.mark = mark;
+            this.grade = grade;
         }
 
-        private void DisplayHeader()
+        public static void Intro()
+        {
+
+            DisplayHeader();
+            DisplayMenu();
+
+            Console.ReadLine();
+        }
+
+        private static void DisplayHeader()
         {
             Console.WriteLine("\n==========================================================================================");
             Console.WriteLine("========                           App03 Student Marks                            ========");
@@ -33,7 +42,7 @@ namespace ConsoleApp3
             Console.ReadLine();
         }
 
-        private void DisplayMenu()
+        private static void DisplayMenu()
         {
             Console.WriteLine("\nMENU:");
             Console.WriteLine("1. Input Marks");
@@ -43,9 +52,16 @@ namespace ConsoleApp3
             Console.WriteLine("5. Exit");
         }
 
-        private void InstantiateStudent()
+        public static void DisplayStudent(List<Student> list)
         {
-            Student student = new Student();
+            foreach (var student in list) 
+            {
+                Console.WriteLine($"First Name: {student.firstName}\n" +
+                    $"Last Name: {student.lastName}\n" +
+                    $"Mark: {student.mark}\n" +
+                    $"Grade: {student.grade}\n");
+            }
+            Console.ReadLine();
         }
     }
 }
