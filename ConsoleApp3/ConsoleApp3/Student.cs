@@ -15,7 +15,7 @@ namespace ConsoleApp3
         private int mark;
         private char grade;
 
-        private static int option;
+        public static int option;
 
          public Student(String firstName, String lastName, int mark, char grade)
         {
@@ -32,6 +32,32 @@ namespace ConsoleApp3
             DisplayMenu();
 
             Console.ReadLine();
+        }
+
+        public static void SelectRoute(int option, List<Student> list)
+        {
+            if (option == 1)
+            {
+                DisplayStudent(list);
+                UpdateMark(list);
+            }
+            else if (option == 2) 
+            {
+                //AddStudent();
+
+            }
+            else if (option == 3)
+            {
+
+            }
+            else if (option == 4)
+            {
+
+            }
+            else if (option == 5)
+            {
+
+            }
         }
 
         private static void DisplayHeader()
@@ -52,12 +78,13 @@ Press enter to begin...");
             Console.Write(@"
 MENU:
 1. Input Marks
+2. Add Student
 2. Output Marks
 3. Output Stats
 4. Output Grade Profile
 5. Exit
 Enter the number corrsoponding the the options shown > ");
-            Student.option = Int16.Parse(Console.ReadLine());
+            option = Int16.Parse(Console.ReadLine());
             Console.WriteLine(option);
         }
 
@@ -80,7 +107,7 @@ Enter the number corrsoponding the the options shown > ");
         {
             Console.Write("Select the index of the student you would" +
                 "like to change the mark of.\n> ");
-            int studentIndex = int.Parse(Console.ReadLine());
+            int studentIndex = int.Parse(Console.ReadLine()) - 1;
 
             if (studentIndex < 0 || studentIndex >= list.Count)
             {
@@ -92,6 +119,11 @@ Enter the number corrsoponding the the options shown > ");
 
             Console.WriteLine($"You have chosen {selectedStudent.firstName}" +
                 $" {selectedStudent.lastName} who currently has {selectedStudent.mark}.");
+
+            Console.WriteLine("Enter the new mark for the student.\n> ");
+            selectedStudent.mark = int.Parse(Console.ReadLine());
+
+            DisplayStudent(list);
         }
     }
 }

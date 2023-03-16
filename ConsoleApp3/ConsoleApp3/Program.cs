@@ -21,8 +21,8 @@ namespace ConsoleApp3
             };
 
             Student.Intro();
-            Student.DisplayStudent(studentList);
 
+            Student.SelectRoute(Student.option, studentList);
         }
     }
 
