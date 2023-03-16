@@ -15,6 +15,8 @@ namespace ConsoleApp3
         private int mark;
         private char grade;
 
+        private static int option;
+
          public Student(String firstName, String lastName, int mark, char grade)
         {
             this.firstName = firstName;
@@ -47,13 +49,16 @@ Press enter to begin...");
 
         private static void DisplayMenu()
         {
-            Console.WriteLine(@"
+            Console.Write(@"
 MENU:
 1. Input Marks
 2. Output Marks
 3. Output Stats
 4. Output Grade Profile
-5. Exit");
+5. Exit
+Enter the number corrsoponding the the options shown > ");
+            Student.option = Int16.Parse(Console.ReadLine());
+            Console.WriteLine(option);
         }
 
         public static void DisplayStudent(List<Student> list)
@@ -73,7 +78,20 @@ MENU:
 
         public static void UpdateMark(List<Student> list)
         {
-            Console.WriteLine("Select a");
+            Console.Write("Select the index of the student you would" +
+                "like to change the mark of.\n> ");
+            int studentIndex = int.Parse(Console.ReadLine());
+
+            if (studentIndex < 0 || studentIndex >= list.Count)
+            {
+                Console.WriteLine("That is an invalid value for the student index.");
+                return;
+            }
+
+            Student selectedStudent = list[studentIndex];
+
+            Console.WriteLine($"You have chosen {selectedStudent.firstName}" +
+                $" {selectedStudent.lastName} who currently has {selectedStudent.mark}.");
         }
     }
 }
