@@ -56,12 +56,20 @@ namespace ConsoleApp3
         {
             foreach (var student in list) 
             {
-                Console.WriteLine($"First Name: {student.firstName}\n" +
+                int index = list.IndexOf(student);
+
+                Console.WriteLine($"Index: {index  + 1}\n" +
+                    $"First Name: {student.firstName}\n" +
                     $"Last Name: {student.lastName}\n" +
                     $"Mark: {student.mark}\n" +
                     $"Grade: {student.grade}\n");
             }
             Console.ReadLine();
+        }
+
+        public static void InputMark(List<Student> list)
+        {
+            Console.WriteLine("Select a ");
         }
     }
 }
