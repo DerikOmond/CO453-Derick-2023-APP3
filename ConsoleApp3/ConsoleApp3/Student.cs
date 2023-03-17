@@ -26,17 +26,19 @@ namespace ConsoleApp3
         private string lastName;
         private int mark;
         private char? grade;
+        private string? gradeClass;
 
         //User assigned option for route to take
-        public static int option;
+        private static int option;
 
         //Student constructor
-         public Student(String firstName, String lastName, int mark, char? grade)
+        public Student(String firstName, String lastName, int mark, char? grade, string? gradeClass)
         {
             this.firstName = firstName;
             this.lastName = lastName;
             this.mark = mark;
             this.grade = grade;
+            this.gradeClass = gradeClass;
         }
 
         //Method used to run program on a list of Student class objects.
@@ -53,7 +55,7 @@ namespace ConsoleApp3
         }
 
         //Depending on the option the user chooses, different paths of methods will be followed.
-        public static void SelectRoute(int option, List<Student> list)
+        private static void SelectRoute(int option, List<Student> list)
         {
             if (option == 1)
             {
@@ -135,19 +137,19 @@ Enter the number corrsoponding the the options shown.");
         public static void DisplayStudent(List<Student> list)
         {
             Console.WriteLine();
-            Console.WriteLine("{0, -5} {1, -14} {2, -14} {3, -7} {4,-4}", "Index",
-                "First Name", "Last Name", "Marks", "Grade");
+            Console.WriteLine("{0, -5} {1, -14} {2, -14} {3, -7} {4,-7} {5, -10}", "Index",
+                "First Name", "Last Name", "Marks", "Grade", "Classification");
             foreach (var student in list)
             {
-                Console.WriteLine("{0, -5} {1, -14} {2, -14} {3, -7} {4, -4}", list.IndexOf(student) + 1,
-                    student.firstName, student.lastName, student.mark, student.grade);
+                Console.WriteLine("{0, -5} {1, -14} {2, -14} {3, -7} {4, -7} {5, -10}", list.IndexOf(student) + 1,
+                    student.firstName, student.lastName, student.mark, student.grade, student.gradeClass);
             }
             Console.WriteLine();
         }
 
         //The user is prompted to select an index from the displayed table and input a
         //new value for that student.
-        public static void UpdateMark(List<Student> list)
+        private static void UpdateMark(List<Student> list)
         {
             Console.Write("Select the index of the student you would " +
                 "like to change the mark of.\n> ");
@@ -168,6 +170,7 @@ Enter the number corrsoponding the the options shown.");
             selectedStudent.mark = int.Parse(Console.ReadLine());
 
             selectedStudent.grade = SetGrade(selectedStudent.mark);
+            selectedStudent.gradeClass = SetClass(selectedStudent.mark);
 
             DisplayStudent(list);
         }
@@ -184,7 +187,7 @@ Enter the number corrsoponding the the options shown.");
             Console.Write("Mark: ");
             int mark = Int16.Parse(Console.ReadLine());
 
-            list.Add(new Student(newFirstName, newLastName, SetMark(mark), SetGrade(SetMark(mark))));
+            list.Add(new Student(newFirstName, newLastName, SetMark(mark), SetGrade(SetMark(mark)), SetClass(mark)));
         }
 
         //Returns a value if it fits in the range available for the marks.
@@ -236,7 +239,35 @@ Enter the number corrsoponding the the options shown.");
                 }
             }
             while (repeat);
+        }
 
+        //Method takes in a mark and assigns a classification for it.
+        public static string SetClass(int getMarkMethod)
+        {
+            if (getMarkMethod >= 0 && getMarkMethod <= 39)
+            {
+                return "Fail";
+            }
+            else if (getMarkMethod >= 40 && getMarkMethod <= 49)
+            {
+                return "Third Class";
+            }
+            else if (getMarkMethod >= 50 && getMarkMethod <= 59)
+            {
+                return "Lower Second Class";
+            }
+            else if (getMarkMethod >= 60 && getMarkMethod <= 69)
+            {
+                return "Upper Second Class";
+            }
+            else if (getMarkMethod >= 70)
+            {
+                return "First Class";
+            }
+            else
+            {
+                return "N/A";
+            }
         }
 
         //Displays the mean, highest and lowest values of marks in the list.
