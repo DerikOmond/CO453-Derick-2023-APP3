@@ -20,7 +20,7 @@ namespace ConsoleApp3
 
         public static void Main(string[] args) 
         {
-            Student.Intro();
+            Student.Run(studentList);
         }
     }
 

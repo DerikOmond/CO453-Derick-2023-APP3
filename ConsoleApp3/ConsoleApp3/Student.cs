@@ -1,4 +1,13 @@
-﻿using System;
+﻿/// <summary>
+/// This console application converts a student object's mark into a grade.
+/// It displays it into a readable table where it updates with the user made changes.
+/// </summary>
+/// <author>
+/// Derick Omondi version 1.0
+/// </author>
+
+//dependancies
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -9,15 +18,19 @@ using System.Xml.Serialization;
 
 namespace ConsoleApp3
 {
+    //Student class
     public class Student
     {
+        //Student object attributes
         private string firstName;
         private string lastName;
         private int mark;
         private char? grade;
 
+        //User assigned option for route to take
         public static int option;
 
+        //Student constructor
          public Student(String firstName, String lastName, int mark, char? grade)
         {
             this.firstName = firstName;
@@ -26,18 +39,20 @@ namespace ConsoleApp3
             this.grade = grade;
         }
 
-        public static void Intro()
+        //Method used to run program on a list of Student class objects.
+        public static void Run(List<Student> list)
         {
             DisplayHeader();
             do
             {
                 DisplayMenu();
-                SelectRoute(option, Program.studentList);
+                SelectRoute(option, list);
             }
             while (true);
             
         }
 
+        //Depending on the option the user chooses, different paths of methods will be followed.
         public static void SelectRoute(int option, List<Student> list)
         {
             if (option == 1)
@@ -77,19 +92,27 @@ namespace ConsoleApp3
            
         }
 
+        //Simply displays the title and author and a short explination of what the program does.
         private static void DisplayHeader()
         {
             Console.WriteLine($@"
 ==========================================================================================
-========                           App03 Student Marks                            =======
-========                             By Derick Omondi                             =======
+========                            App03 Student Marks                            =======
+========                              By Derick Omondi                             =======
 ==========================================================================================
+
+This application lists students and their grades. More students can be added and the basic
+can be viewed. If changes are made to the marks of already existing students are changed,
+or more students are added, the stats will be updated alongside in order to accuratley
+represent the data.
 
 Press enter to begin...");
 
             Console.ReadLine();
         }
 
+        //Shows the options available for the user's choice.
+        //The variable 'option' is updated when the user makes a decision.
         private static void DisplayMenu()
         {
             Console.Write(@"
@@ -107,12 +130,14 @@ Enter the number corrsoponding the the options shown.");
             Console.WriteLine();
         }
 
+        //After printing the headers, a for each loop goes through all the student
+        //and prints each attribute into the table
         public static void DisplayStudent(List<Student> list)
         {
             Console.WriteLine();
-            Console.WriteLine("{0, -5} {1, -14} {2, -14} {3, -7} {4,-4}", "Index", 
+            Console.WriteLine("{0, -5} {1, -14} {2, -14} {3, -7} {4,-4}", "Index",
                 "First Name", "Last Name", "Marks", "Grade");
-            foreach (var student in list) 
+            foreach (var student in list)
             {
                 Console.WriteLine("{0, -5} {1, -14} {2, -14} {3, -7} {4, -4}", list.IndexOf(student) + 1,
                     student.firstName, student.lastName, student.mark, student.grade);
@@ -120,6 +145,8 @@ Enter the number corrsoponding the the options shown.");
             Console.WriteLine();
         }
 
+        //The user is prompted to select an index from the displayed table and input a
+        //new value for that student.
         public static void UpdateMark(List<Student> list)
         {
             Console.Write("Select the index of the student you would " +
@@ -145,6 +172,7 @@ Enter the number corrsoponding the the options shown.");
             DisplayStudent(list);
         }
 
+        //User inputs the basic details (name and marks) to be added to the Student list.
         public static void AddStudent(List<Student> list)
         {
             Console.Write("First name: ");
@@ -159,6 +187,7 @@ Enter the number corrsoponding the the options shown.");
             list.Add(new Student(newFirstName, newLastName, SetMark(mark), SetGrade(SetMark(mark))));
         }
 
+        //Returns a value if it fits in the range available for the marks.
         public static int SetMark(int studentMark)
         {
             if (studentMark < 0 || studentMark > 100)
@@ -172,6 +201,9 @@ Enter the number corrsoponding the the options shown.");
             }
         }
 
+        //Depending on the value of the argument, a grade will be slected.
+        //When changing the mark of a student, the new grade will need to 
+        //be selected.
         public static char SetGrade(int getMarkMethod)
         {
             bool repeat = false;
@@ -207,6 +239,7 @@ Enter the number corrsoponding the the options shown.");
 
         }
 
+        //Displays the mean, highest and lowest values of marks in the list.
         private static void OutputStats(List<Student> list)
         {
             Console.WriteLine($"Mean mark: {CalculateMean(list)}\n" +
@@ -214,6 +247,8 @@ Enter the number corrsoponding the the options shown.");
                 $"Highest Mark: {FindMaximum(list)}\n");
         }
 
+        //Sums up all the marks in the list and divides it by the
+        //total number of objects int the list.
         private static double CalculateMean(List<Student> list)
         {
             int total = 0;
@@ -228,9 +263,13 @@ Enter the number corrsoponding the the options shown.");
             return mean;
         }
 
+        //Goes through all the student objects and checks if their
+        //value is less that the previous.
+        //If a lesser value is found, the minimum is updated to that
+        //value.
         private static int FindMinimum(List<Student> list)
         {
-            int lowestMark = 101;
+            int lowestMark = list[0].mark;
 
             foreach (var student in list) 
             {
@@ -243,9 +282,13 @@ Enter the number corrsoponding the the options shown.");
             return lowestMark;
         }
 
+        //Goes through all the student objects and checks if their
+        //value is higher that the previous.
+        //If a higher value is found, the minimum is updated to that
+        //value.
         private static int FindMaximum(List<Student> list)
         {
-            int highestMark = -1;
+            int highestMark = list[0].mark;
 
             foreach(var student in list)
             {
@@ -258,11 +301,15 @@ Enter the number corrsoponding the the options shown.");
             return highestMark;
         }
 
+        //Shows the percentage of student's that achieved a certain grade
         private static void DisplayGradeProfile(List<Student> list, char gradeValue)
         {
             Console.WriteLine($"{FindProfile(list, gradeValue)}% of students achieved a grade {gradeValue}.");
         }
 
+        //Iterates through all the student objects
+        //If a grade value matches the one specified,
+        //the variable 'count' is incrimented.
         private static double FindProfile(List<Student> list, char gradeValue)
         {
             int count = 0;
