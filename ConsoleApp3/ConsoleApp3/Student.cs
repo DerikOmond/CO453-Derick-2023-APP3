@@ -44,7 +44,8 @@ namespace ConsoleApp3
             }
             else if (option == 2) 
             {
-                //AddStudent();
+                AddStudent(list);
+                DisplayStudent(list);
 
             }
             else if (option == 3)
@@ -138,7 +139,55 @@ Enter the number corrsoponding the the options shown > ");
             Console.Write("Mark: ");
             int mark = Int16.Parse(Console.ReadLine());
 
-            list.Add(new Student(newFirstName, newLastName, mark, grade));
+            list.Add(new Student(newFirstName, newLastName, SetMark(mark), SetGrade(SetMark(mark))));
+        }
+
+        public static int SetMark(int studentMark)
+        {
+            if (studentMark < 0 || studentMark > 100)
+            {
+                Console.WriteLine("That isn't a valid value!!!");
+                return 0;
+            }
+            else
+            {
+                return studentMark;
+            }
+        }
+
+        public static char SetGrade(int getMarkMethod)
+        {
+            bool repeat = false;
+
+            do
+            {
+                if (getMarkMethod >= 0 && getMarkMethod <= 39)
+                {
+                    return 'F';
+                }
+                else if (getMarkMethod >= 40 && getMarkMethod <= 49)
+                {
+                    return 'D';
+                }
+                else if (getMarkMethod >= 50 && getMarkMethod <= 59)
+                {
+                    return 'C';
+                }
+                else if (getMarkMethod >= 60 && getMarkMethod <= 69)
+                {
+                    return 'B';
+                }
+                else if (getMarkMethod >= 70)
+                {
+                    return 'A';
+                }
+                else
+                {
+                    return 'U';
+                }
+            }
+            while (repeat);
+
         }
     }
 }
