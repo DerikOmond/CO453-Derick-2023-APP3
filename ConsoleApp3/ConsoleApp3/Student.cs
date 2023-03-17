@@ -92,15 +92,12 @@ Enter the number corrsoponding the the options shown > ");
 
         public static void DisplayStudent(List<Student> list)
         {
+            Console.WriteLine("{0, -5} {1, -14} {2, -14} {3, 3} {4,3}", "Index", 
+                "First Name", "Last Name", "Marks", "Grade");
             foreach (var student in list) 
             {
-                int index = list.IndexOf(student);
-
-                Console.WriteLine($"Index: {index  + 1}\n" +
-                    $"First Name: {student.firstName}\n" +
-                    $"Last Name: {student.lastName}\n" +
-                    $"Mark: {student.mark}\n" +
-                    $"Grade: {student.grade}\n");
+                Console.WriteLine("{0, -5} {1, -14} {2, -14} {3, 3} {4, 4}", list.IndexOf(student) + 1,
+                    student.firstName, student.lastName, student.mark, student.grade);
             }
             Console.ReadLine();
         }
